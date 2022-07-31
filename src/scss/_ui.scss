@@ -1,0 +1,101 @@
+@import 'vars';
+@import 'components/_text.scss';
+@import 'components/_buttons.scss';
+@import 'components/_fonts.scss';
+.fg {
+    position: relative;
+    margin: 0;
+    input {
+        border-radius:  0.6em;
+        border: 1px solid #FFFFFF;
+        padding: 0 2em;
+        height: 3.1em;
+        width: 100%;
+        font-size: 18px;
+        color: #000;
+        font-weight: 500;
+        background-color: transparent;
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+    }
+    &__badge{
+        position: absolute;
+        pointer-events: none;
+        opacity: 0;
+        color: #fff;
+        box-shadow: 0px 0px 10px rgba(28, 146, 255, 0.25);
+        font-size: 1.5em;
+        right: 10px;
+        bottom: 0.8em;
+        height: 2.3em;
+        min-width: 11.5em;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: .6em;
+        &--success{
+            background: #3AB500;
+        }
+        &--error{
+            background: $red;
+        }
+    }
+    .input-succes{
+        &~.fg__badge--success{
+            opacity: 1;
+        }
+    }
+    .input-error{
+        &~.fg__badge--error{
+            opacity: 1;
+        }
+    }
+}
+
+.check {
+    position: relative;
+    input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        cursor: pointer;
+        &:checked+label {
+            &::before {
+                // background-color: $green;
+                border: 3px solid #fff;
+            }
+        }
+        &:disabled+label {
+            color: #AAAAAA;
+            pointer-events: none;
+        }
+    }
+    label {
+        padding-left: 40px;
+        position: relative;
+        min-height: 20px;
+        font-size: 14px;
+        line-height: 20px;
+        cursor: pointer;
+        &:before {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            width: 20px;
+            height: 20px;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all .100s;
+        }
+    }
+}
