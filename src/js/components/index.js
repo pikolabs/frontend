@@ -22,6 +22,7 @@ function communitySlider() {
 function headSlider() {
     var swiper = new Swiper('.main__img.swiper-container', {
         slidesPerView: 1,
+        allowTouchMove: false,
         effect: 'fade',
         autoplay: {
             delay: 4000
