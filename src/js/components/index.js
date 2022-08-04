@@ -30,8 +30,22 @@ function headSlider() {
         fadeEffect: {
             crossFade: false
         },
+        on: {
+            init: function () {
+                let title = document.querySelector(".main__img .swiper-slide-active").getAttribute("data-head-title")
+                document.querySelector(".words-slider").innerHTML = title
+            },
+            slideChange: function () {
+                let title = document.querySelector(".main__img .swiper-slide-next").getAttribute("data-head-title")
+                setTimeout(
+                    document.querySelector(".words-slider").innerHTML = title,
+                    2000
+                )
+            },
+        },
     })
 }
+
 
 function artSlider() {
     var swiper = new Swiper('.main__art-items.swiper-container', {

@@ -42,8 +42,13 @@
     font-weight: 800;
     font-size: 5.5em;
     line-height: 95%;
-    span{
-      color: $red;
+
+    &-word{
+      display: inline;
+      .swiper-container{
+        display: inline;
+        overflow: hidden;
+      }
     }
   }
   &__desc{
