@@ -2,10 +2,14 @@ let burger = document.querySelector(".header__burger")
 let body = document.querySelector("body")
 let header = document.querySelector("header")
 
-burger.onclick = function() {
-    header.classList.toggle("header--active")
-    body.classList.toggle("fixed-body")
+if(burger){
+    burger.onclick = function() {
+        header.classList.toggle("header--active")
+        body.classList.toggle("fixed-body")
+    }
 }
+
+
 
 
 const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -92,7 +96,7 @@ async function search(){
     let data = await fetch("/api/search?" + new URLSearchParams({ query: query_value.value }))
     let list = await data.json()
      container.innerHTML = ""
-   
+
     list.forEach((i) => {
         container.innerHTML += `
         <div class="quiz__row">

@@ -99,3 +99,56 @@
         }
     }
 }
+
+.tier1{
+    background: #F3F3F3;
+}
+
+.tier2{
+    background: #E4EFFC;
+}
+
+.tier3{
+    background: #D1E6FF;
+}
+
+.tier4{
+    background: #B6D7FF;
+}
+
+.tier5{
+    background: #A3CDFF;
+}
+
+.tier6{
+    background: #97C7FF;
+}
+
+.tier7{
+    background: #7AB8FF;
+}
+
+.tier8{
+    background: #5CA8FF;
+}
+
+.tier9{
+    background-image: url(../img/bg4.png);
+    background-size: 300% 120%;
+    background-position: center;
+}
+
+.copy-input{
+    position: relative;
+    input{
+        color: #fff !important;
+        background-color: #4F4F4F !important;
+    }
+    &__btn{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 1em;
+        z-index: 2;
+    }
+}

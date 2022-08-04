@@ -36,6 +36,7 @@ function headSlider() {
 function artSlider() {
     var swiper = new Swiper('.main__art-items.swiper-container', {
         slidesPerView: 'auto',
+        loop: true,
         autoplay: {
             delay: 4000
         },
@@ -46,6 +47,7 @@ function artSlider() {
 function brandSlider() {
     var swiper = new Swiper('.community__brands.swiper-container', {
         slidesPerView: 'auto',
+        loop: true,
         autoplay: {
             delay: 4000
         },

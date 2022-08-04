@@ -8,20 +8,27 @@
                 <div class="container">
                     <div class="statistic__inner">
                         <div class="statistic__left">
-                            <div class="statistic__title">You have 603 points</div>
+                            <div class="statistic__subtitle">You are eligible for</div>
+                            <div class="statistic__title">603 tokens</div>
                             <div class="statistic__desc">Point represent comrohensive difference between different domains, expertaion, tiers and activieties. The more points you have to more airdrop you can potentialy get</div>
-                            <button class="statistic__btn mbtn mbtn-white">Invite a friend →</button>
+                            <button class="statistic__btn mbtn mbtn-black arrow-right">
+                                <span class="arrow-right__text">Invite a friend</span>
+                                <span class="arrow-right__icon">→</span>
+                            </button>
                         </div>
                         <div class="statistic__right">
                             <div class="quiz">
                                 <div class="quiz__step">
                                     <div class="quiz__title display2">Your domains</div>
                                     <div class="quiz__table">
-                                     
+
                                     </div>
                                     <div class="quiz__bottom">
                                         <button class="quiz__link">Add domain to get more points</button>
-                                        <button class="quiz__btn mbtn mbtn-white" data-step="addDomain">Add domain →</button>
+                                        <button class="quiz__btn mbtn mbtn-white arrow-right" data-step="addDomain">
+                                            <span class="arrow-right__text">Add domain</span>
+                                            <span class="arrow-right__icon">→</span>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="quiz__step quiz__step2">
@@ -29,13 +36,16 @@
                                     <div class="quiz__form">
                                         <fieldset class="quiz__fg fg">
                                             <label>Enter the exact domain name you want to verify </label>
-                                            <input type="text" class="domain_field input-succes">
-                                            <div class="fg__badge fg__badge--success">eligible</div>
+                                            <input type="text" class="domain_field">
                                         </fieldset>
                                         <fieldset class="quiz__fg fg">
                                             <label>Enter this complete domain verification key in the TXT value field of your DNS zone.</label>
-                                            <input type="text" class="txt_record_field input-error">
-                                            <div class="fg__badge fg__badge--error">TXT record not found</div>
+                                            <div class="copy-input">
+                                                <input type="text" class="txt_record_field">
+                                                <button class="copy-input__btn">
+                                                    <img src="img/copy.png" alt="">
+                                                </button>
+                                            </div>
                                         </fieldset>
                                     </div>
                                     <div class="quiz__bottom">
@@ -47,14 +57,12 @@
                         </div>
                     </div>
                     <div class="find__inner">
-                        <div class="find__question display2">
-                            <span>Don’t have .art domain yet?</span> <br>
-                            Register now and claim Airdrop
-                        </div>
                         <div class="find__search">
-                            <input type="text" class="query_value" placeholder="Type domain name here">
-                            <button onclick="search()" class="find__search-btn mbtn mbtn-linear">
-                                Search domain →
+                            <input type="text" class="query_value" placeholder="Type domain name here for example ">
+                            <a href="" class="find__search-link tier9 mbtn">black.art</a>
+                            <button onclick="search()" class="find__search-btn mbtn mbtn-black arrow-right">
+                                <span class="arrow-right__text">Search domain</span>
+                                <span class="arrow-right__icon">→</span>
                             </button>
                         </div>
                         <br>
@@ -67,15 +75,13 @@
                                 <img src="img/brand2.png" alt="">
                             </div>
                         </div>
-                        <div class="find__title display2">Top brand and creative <br> community already joined</div>
-                        <div class="find__num">202,344</div>
-                        <div class="find__desc display2">
-                            ART domain names registred
-                        </div>
                     </div>
                 </div>
             </section>
         </main>
+        <footer class="footer footer--bg">
+            @@include('components/page-blocks/_footer.html')
+        </footer>
     </div>
     @@include('components/page-blocks/_scripts.html')
 </body>
