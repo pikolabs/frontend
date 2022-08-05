@@ -2,10 +2,14 @@ let burger = document.querySelector(".header__burger")
 let body = document.querySelector("body")
 let header = document.querySelector("header")
 
-burger.onclick = function() {
-    header.classList.toggle("header--active")
-    body.classList.toggle("fixed-body")
+if(burger){
+    burger.onclick = function() {
+        header.classList.toggle("header--active")
+        body.classList.toggle("fixed-body")
+    }
 }
+
+
 
 
 const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -85,22 +89,42 @@ async function claim() {
 
 }
 
+async function search(){
+    console.log
+    let query_value = document.querySelector(".query_value")
+    let container = document.querySelector(".container_result")
+    let data = await fetch("/api/search?" + new URLSearchParams({ query: query_value.value }))
+    let list = await data.json()
+     container.innerHTML = ""
 
+    list.forEach((i) => {
+        container.innerHTML += `
+        <div class="quiz__row">
+            <div class="quiz__info">
+            <div class="quiz__info-item">` + i.Domain + `</div>
+            <div class="quiz__info-item">Tier `+i.Tier+`</div>
+            <div class="quiz__info-item"><a href="https://search.art.art/en?domain=`+i.Domain+`">check</a></div>
+            <div class="quiz__info-item">Score: `+ 10*2**i.Tier +`</div>
+            </div>
+        </div>`
+
+    })
+}
 
 async function getDomains() {
 
     let quiz_table = document.querySelector(".quiz__table")
-    quiz_table.innerHTML = ""
     let data = await fetch("/api/domains?" + new URLSearchParams({ account: address }))
     let list = await data.json()
+    quiz_table.innerHTML = ""
     list.forEach((i) => {
         quiz_table.innerHTML += `
         <div class="quiz__row">
             <div class="quiz__info">
             <div class="quiz__info-item">` + i.Domain + `</div>
-            <div class="quiz__info-item">Tier 1</div>
-            <div class="quiz__info-item">Exp 22.08.24</div>
-            <div class="quiz__info-item">Score: 462</div>
+            <div class="quiz__info-item">Tier `+i.Tier+`</div>
+            <div class="quiz__info-item">Exp `+ (new Date(i.Exp)).toLocaleDateString()+`</div>
+            <div class="quiz__info-item">Score: `+ 10*2**i.Tier +`</div>
             </div>
         </div>`
 

@@ -22,6 +22,7 @@ function communitySlider() {
 function headSlider() {
     var swiper = new Swiper('.main__img.swiper-container', {
         slidesPerView: 1,
+        allowTouchMove: false,
         effect: 'fade',
         autoplay: {
             delay: 4000
@@ -30,12 +31,27 @@ function headSlider() {
         fadeEffect: {
             crossFade: false
         },
+        on: {
+            init: function () {
+                let title = document.querySelector(".main__img .swiper-slide-active").getAttribute("data-head-title")
+                document.querySelector(".words-slider").innerHTML = title
+            },
+            slideChange: function () {
+                let title = document.querySelector(".main__img .swiper-slide-next").getAttribute("data-head-title")
+                setTimeout(
+                    document.querySelector(".words-slider").innerHTML = title,
+                    2000
+                )
+            },
+        },
     })
 }
+
 
 function artSlider() {
     var swiper = new Swiper('.main__art-items.swiper-container', {
         slidesPerView: 'auto',
+        loop: true,
         autoplay: {
             delay: 4000
         },
@@ -46,6 +62,7 @@ function artSlider() {
 function brandSlider() {
     var swiper = new Swiper('.community__brands.swiper-container', {
         slidesPerView: 'auto',
+        loop: true,
         autoplay: {
             delay: 4000
         },

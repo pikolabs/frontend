@@ -10,13 +10,20 @@
   &__img{
     position: absolute;
     display: block;
-    width: 32%;
+    width: 35%;
     left: 52%;
     top: 50%;
     transform: translate(-60%,-50%);
     z-index: 2;
     img{
       width: 100%;
+    }
+    .swiper{
+      &-slide{
+        &:not(.swiper-slide-active){
+          opacity: 0 !important;
+        }
+      }
     }
   }
   &__left{
@@ -35,8 +42,13 @@
     font-weight: 800;
     font-size: 5.5em;
     line-height: 95%;
-    span{
-      color: $red;
+
+    &-word{
+      display: inline;
+      .swiper-container{
+        display: inline;
+        overflow: hidden;
+      }
     }
   }
   &__desc{
@@ -92,7 +104,7 @@
       }
     }
     &-icon{
-      width: 26px;
+      width: 36px;
       flex-shrink: 0;
       margin-right: 17px;
       img{
@@ -116,7 +128,9 @@
   padding: 12em 0 4em;
   &__question{
     text-align: center;
+    font-weight: 500;
     span{
+      font-weight: 800;
       color: inherit;
       font-size: 1.5em;
       line-height: 95%;
@@ -152,7 +166,7 @@
     position: relative;
     margin-top: 5.2em;
     input{
-      border: 2px solid #484848;
+      border: 3px solid #484848;
       border-radius: .62em;
       font-size: 1.5em;
       width: 100%;
@@ -175,6 +189,20 @@
       top: 50%;
       transform: translateY(-50%);
       right: 1em;
+    }
+    &-link{
+      position: absolute;
+      left: 21em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.85em;
+      font-family: $font3;
+      border-radius: .5em;
+      height: 2.2em;
+      padding: 0 3em;
+      &:hover{
+        opacity: .9;
+      }
     }
   }
   &__brands{
@@ -459,6 +487,9 @@
         background-position: 10px center;
         padding: 0 20px 0 40px;
       }
+      &-link{
+        display: none;
+      }
       &-btn{
         position: static;
         font-size: 14px;
@@ -479,6 +510,7 @@
   }
 
   .community{
+    padding: 20px 0 60px;
     &__brands{
       margin-top: 7em;
       padding: 0;
@@ -486,9 +518,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-         img{
-           max-height: 42px;
-         }
+        img{
+          max-height: 42px;
+        }
       }
     }
     &__user{
@@ -515,7 +547,7 @@
   .why-choose{
     padding: 4em 0;
     &__items{
-      margin-top: 3.5em;
+      margin-top: 150px;
       gap: 90px;
     }
     &__item{
