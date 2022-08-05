@@ -375,7 +375,7 @@
       font-size: 2em;
       height: 100%;
       padding: 0 1.46em;
-      border-color: $black;
+      border: 3px solid $black;
       color: $black;
       &::placeholder{
         color: $black;
