@@ -24,6 +24,7 @@ function headSlider() {
         slidesPerView: 1,
         allowTouchMove: false,
         effect: 'fade',
+        loop: true,
         autoplay: {
             delay: 4000
         },
@@ -71,6 +72,10 @@ function brandSlider() {
 }
 
 communitySlider()
-headSlider()
+
 artSlider()
 brandSlider()
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    headSlider()
+});

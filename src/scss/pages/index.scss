@@ -421,7 +421,10 @@
       }
     }
     &__img{
-      display: none;
+      position: fixed;
+      left: -100vh;
+      top: -100vh;
+      z-index: 10;
     }
     &__art{
       &-img{
