@@ -90,18 +90,47 @@ let tier = 0
 let offset = 0
 let page = 0
 
+
+async function onEnter() {
+
+    let input = document.querySelector(".query_value")
+    if (!input) {
+        return
+    }
+    input.addEventListener("keypress", function(event) {
+        if (event.key == "Enter") {
+            event.preventDefault()
+            search()
+        }
+    })
+}
+
+onEnter()
+let prev_query = ''
 async function search() {
     let query_value = document.querySelector(".query_value")
     let container = document.getElementById("results_container")
     let count = document.getElementById("results_count")
-
+    let loader = document.getElementById("results_loader")
+    
     if (!container) {
         return
     }
-    let data = await fetch("/api/search?" + new URLSearchParams({ query: query_value.value, tier, offset:page*10 }))
+    container.innerHTML = ""
+    count.innerHTML = ""
+
+    loader.classList.remove("hidden")
+
+    if (query_value.value!=prev_query){
+        page=0
+        pagination(0)
+    }
+    prev_query=query_value.value
+
+    let data = await fetch("/api/search?" + new URLSearchParams({ query: query_value.value, tier, offset: page * 10 }))
     let list = await data.json()
-    
-    count.innerHTML="About "+list.count+" search results"
+
+    count.innerHTML = "About " + list.count + " search results"
     container.innerHTML = ""
     list.data.forEach((i) => {
         if (i.Tier == 0) {
@@ -120,6 +149,7 @@ async function search() {
     })
 
     pagination(list.count)
+    loader.classList.add("hidden")
 
 }
 
@@ -157,43 +187,47 @@ async function tiersUpdate() {
     }
 }
 
-async function pagination(count){
+async function pagination(count) {
     let pagination_buttons = document.getElementById("pagination_buttons")
-    pagination_buttons.innerHTML=''
-    let pages = Math.floor(count/10)
+    pagination_buttons.innerHTML = ''
+    if (count==0){
+        return
+    }
+    let pages = Math.floor(count / 10)
 
 
 
     let numbers = new Set([
-        0,1,2,
-        page-1,page,page+1,
-        pages-2,pages-1,pages
+        0, 1, 2,
+        page - 1, page, page + 1,
+        pages - 2, pages - 1, pages
     ])
-    if(page<3){
-      
-        let mid = Math.floor(pages/2)
-        numbers.add(mid-1)
+    if (page < 3) {
+
+        let mid = Math.floor(pages / 2)
+        numbers.add(mid - 1)
         numbers.add(mid)
-        numbers.add(mid+1)
+        numbers.add(mid + 1)
     }
     numbers = [...numbers]
-    numbers = numbers.sort(function(a,b){return a-b})
-    
-    for(let i = 0; i< numbers.length;i++){
-        if(numbers[i]>=0){
-            if (i>0&&numbers[i-1]+1!=numbers[i]){
-                pagination_buttons.innerHTML+= ``
-                        
-            }
-            let active = numbers[i]==page ? 'domains__tab--active':''
+    numbers = numbers.sort(function(a, b) { return a - b })
 
-            pagination_buttons.innerHTML+= `<a onclick="set_page(event,`+numbers[i]+`)" class="domains__tab `+active+`">`+(numbers[i]+1)+`</a>`
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] >= 0 && numbers[i]<=pages) {
+            if (i > 0 && numbers[i - 1] + 1 != numbers[i]) {
+                pagination_buttons.innerHTML += ``
+
+            }
+
+            let active = numbers[i] == page ? 'domains__tab--active' : ''
+
+            pagination_buttons.innerHTML += `<a onclick="set_page(event,` + numbers[i] + `)" class="domains__tab ` + active + `">` + (numbers[i] + 1) + `</a>`
         }
     }
 }
 
-async function set_page(e,i){
-    page=i
+async function set_page(e, i) {
+    page = i
     console.log(e)
 
     e.target.classList.add('domains__tab--active')
