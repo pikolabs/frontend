@@ -238,12 +238,14 @@ tiers()
 
 
 async function getDomains() {
-
+    let tokens_count = document.getElementById("tokens_count")
     let quiz_table = document.querySelector(".quiz__table")
     let data = await fetch("/api/domains?" + new URLSearchParams({ account: address }))
     let list = await data.json()
     quiz_table.innerHTML = ""
+    let tokens=0
     list.forEach((i) => {
+        tokens+=10 * 2 ** i.Tier
         quiz_table.innerHTML += `
         <div class="quiz__row">
             <div class="quiz__info">
@@ -255,6 +257,7 @@ async function getDomains() {
         </div>`
 
     })
+    tokens_count.innerHTML=tokens+" tokens"
 }
 
 
