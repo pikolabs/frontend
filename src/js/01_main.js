@@ -63,7 +63,7 @@ async function checkAccount() {
     let signer = provider.getSigner()
     address = await signer.getAddress()
     if (address) {
-        connect_btn.innerHTML = address.substr(0, 6) + "..." + address.substr(36, 4)
+        connect_btn.innerHTML = address.substr(0, 6) + "..." + address.substr(38, 4)
         try {
             getTXTRecord()
             getDomains()
@@ -277,10 +277,21 @@ function copyTXTRecord() {
 }
 
 
-async function addDomain() {
 
+    let domain = document.querySelector(".domain_field")
+    if (domain){
+    }
+
+async function addDomain() {
     let signer = provider.getSigner()
     let domain = document.querySelector(".domain_field")
+    domain.parentElement.classList.remove("quiz__fg_error")
+    domain.value=domain.value.toLowerCase()
+    if (!(/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.art$/.test(domain.value))){
+        domain.parentElement.classList.add("quiz__fg_error")
+        alert("Please, make sure the domain is .art")
+        return
+    }
     let data = await fetch("/api/add-domain?" + new URLSearchParams({ account: await signer.getAddress(), domain: domain.value }))
     if (data.status != 200) {
         alert("Please, check TXT record and try it later")
