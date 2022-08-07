@@ -112,7 +112,7 @@ async function search() {
     let container = document.getElementById("results_container")
     let count = document.getElementById("results_count")
     let loader = document.getElementById("results_loader")
-    
+
     if (!container) {
         return
     }
@@ -121,11 +121,11 @@ async function search() {
 
     loader.classList.remove("hidden")
 
-    if (query_value.value!=prev_query){
-        page=0
+    if (query_value.value != prev_query) {
+        page = 0
         pagination(0)
     }
-    prev_query=query_value.value
+    prev_query = query_value.value
 
     let data = await fetch("/api/search?" + new URLSearchParams({ query: query_value.value, tier, offset: page * 10 }))
     let list = await data.json()
@@ -190,7 +190,7 @@ async function tiersUpdate() {
 async function pagination(count) {
     let pagination_buttons = document.getElementById("pagination_buttons")
     pagination_buttons.innerHTML = ''
-    if (count==0){
+    if (count == 0) {
         return
     }
     let pages = Math.floor(count / 10)
@@ -213,7 +213,7 @@ async function pagination(count) {
     numbers = numbers.sort(function(a, b) { return a - b })
 
     for (let i = 0; i < numbers.length; i++) {
-        if (numbers[i] >= 0 && numbers[i]<=pages) {
+        if (numbers[i] >= 0 && numbers[i] <= pages) {
             if (i > 0 && numbers[i - 1] + 1 != numbers[i]) {
                 pagination_buttons.innerHTML += ``
 
@@ -243,21 +243,23 @@ async function getDomains() {
     let data = await fetch("/api/domains?" + new URLSearchParams({ account: address }))
     let list = await data.json()
     quiz_table.innerHTML = ""
-    let tokens=0
+    let tokens = 0
     list.forEach((i) => {
-        tokens+=10 * 2 ** i.Tier
+        tokens += 10 * 2 ** i.Tier
+
+
         quiz_table.innerHTML += `
-        <div class="quiz__row">
-            <div class="quiz__info">
-            <div class="quiz__info-item">` + i.Domain + `</div>
-            <div class="quiz__info-item">Tier ` + i.Tier + `</div>
-            <div class="quiz__info-item">Exp ` + (new Date(i.Exp)).toLocaleDateString() + `</div>
-            <div class="quiz__info-item">Score: ` + 10 * 2 ** i.Tier + `</div>
+        <div class="domains__row">
+            <div class="domains__info tier` + i.Tier + `">
+                <div class="domains__info-item">` + i.Domain + `</div>
+                <div class="domains__info-item">Tier ` + i.Tier + `</div>
+                <div class="domains__info-item">Exp ` + (new Date(i.Exp)).toLocaleDateString() + `</div>
+                <div class="domains__info-item">Score: ` + 10 * 2 ** i.Tier + `</div>
             </div>
         </div>`
 
     })
-    tokens_count.innerHTML=tokens+" tokens"
+    tokens_count.innerHTML = tokens + " tokens"
 }
 
 
@@ -270,18 +272,23 @@ async function getTXTRecord() {
 }
 
 
-
-async function addDomain() {
-    try {
-        let signer = provider.getSigner()
-        let domain = document.querySelector(".domain_field")
-        let data = await fetch("/api/add-domain?" + new URLSearchParams({ account: await signer.getAddress(), domain: domain.value }))
-    } catch (err) {
-        console.log(err)
-    }
+function copyTXTRecord() {
+    navigator.clipboard.writeText(document.querySelector(".txt_record_field").value)
 }
 
-let verify_button = document.querySelector(".verify_btn")
-if (verify_button) {
-    verify_button.onclick = addDomain
+
+async function addDomain() {
+
+    let signer = provider.getSigner()
+    let domain = document.querySelector(".domain_field")
+    let data = await fetch("/api/add-domain?" + new URLSearchParams({ account: await signer.getAddress(), domain: domain.value }))
+    if (data.status != 200) {
+        alert("Please, check TXT record and try it later")
+        return
+    }
+
+    await getDomains()
+    document.querySelector(".quiz__step2").classList.remove("quiz__step2--active")
+
+
 }

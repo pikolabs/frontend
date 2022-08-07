@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="quiz__bottom">
                                         <button class="quiz__link">Add domain to get more points</button>
-                                        <button class="quiz__btn mbtn mbtn-white arrow-right" data-step="addDomain">
+                                        <button class="quiz__btn mbtn mbtn-white arrow-right"  data-step="addDomain">
                                             <span class="arrow-right__text">Add domain</span>
                                             <span class="arrow-right__icon">→</span>
                                         </button>
@@ -42,7 +42,7 @@
                                             <label>Enter this complete domain verification key in the TXT value field of your DNS zone.</label>
                                             <div class="copy-input">
                                                 <input type="text" class="txt_record_field">
-                                                <button class="copy-input__btn">
+                                                <button class="copy-input__btn" onclick="copyTXTRecord()">
                                                     <img src="img/copy.png" alt="">
                                                 </button>
                                             </div>
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="quiz__bottom">
                                         <button class="quiz__link" data-step="backStep1">←back</button>
-                                        <button class="verify_btn quiz__btn mbtn mbtn-white">Verify ownership →</button>
+                                        <button class="verify_btn quiz__btn mbtn mbtn-white" onclick="addDomain()">Verify ownership →</button>
                                     </div>
                                 </div>
                             </div>
