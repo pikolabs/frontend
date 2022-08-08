@@ -278,10 +278,6 @@ function copyTXTRecord() {
 
 
 
-    let domain = document.querySelector(".domain_field")
-    if (domain){
-    }
-
 async function addDomain() {
     let signer = provider.getSigner()
     let domain = document.querySelector(".domain_field")
@@ -303,3 +299,16 @@ async function addDomain() {
 
 
 }
+
+async function suggestion(){
+    let domain = document.querySelector(".find__search-link")
+    if (!domain){
+        return
+    }
+    let data = await fetch("/api/search?" + new URLSearchParams({ suggestion:true }))
+    let list = await data.json()
+    domain.innerHTML=list.data[0].Domain
+    domain.href=`https://search.art.art/en?domain=` + list.data[0].Domain
+}
+
+suggestion()
