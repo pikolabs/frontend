@@ -312,3 +312,10 @@ async function suggestion(){
 }
 
 suggestion()
+
+
+async function addEmail(event){
+    fetch("/api/add-email?email="+document.getElementById("subscriber_email").value)
+    event.preventDefault()
+    document.getElementById("subscriber_email").value=""
+}
