@@ -70,7 +70,9 @@
     color: #FFFFFF;
   }
   &__table{
-    height:15em;
+    height:26.125em;
+    overflow-y:auto;
+    margin-bottom:1em;
     margin-top: 1em;
   }
   &__row{
@@ -107,7 +109,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 14em;
   }
   &__link{
     color: rgba(255, 255, 255, 0.5);
@@ -142,6 +143,19 @@
         box-shadow: 0px 0px 10px rgba(28, 146, 255, 0.25);
         color: #FFE600;
       }
+    }
+    &:not(:last-child){
+      margin-bottom: 3.1em;
+    }
+  }
+  &__fg_error{
+  
+    input{
+      font-size: 1.5em;
+      height: 3.8em;
+      background-color: #fff;
+      color: $black;
+      border: 2px solid red;
     }
     &:not(:last-child){
       margin-bottom: 3.1em;
@@ -237,4 +251,7 @@
       }
     }
   }
+}
+.error-field{
+  border:2px solid red;
 }

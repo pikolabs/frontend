@@ -9,7 +9,7 @@
                     <div class="statistic__inner">
                         <div class="statistic__left">
                             <div class="statistic__subtitle">You are eligible for</div>
-                            <div class="statistic__title">603 tokens</div>
+                            <div id="tokens_count" class="statistic__title">0 tokens</div>
                             <div class="statistic__desc">Point represent comrohensive difference between different domains, expertaion, tiers and activieties. The more points you have to more airdrop you can potentialy get</div>
                             <button class="statistic__btn mbtn mbtn-black arrow-right">
                                 <span class="arrow-right__text">Invite a friend</span>
@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="quiz__bottom">
                                         <button class="quiz__link">Add domain to get more points</button>
-                                        <button class="quiz__btn mbtn mbtn-white arrow-right" data-step="addDomain">
+                                        <button class="quiz__btn mbtn mbtn-white arrow-right"  data-step="addDomain">
                                             <span class="arrow-right__text">Add domain</span>
                                             <span class="arrow-right__icon">→</span>
                                         </button>
@@ -35,14 +35,14 @@
                                     <div class="quiz__title display2">Add domain</div>
                                     <div class="quiz__form">
                                         <fieldset class="quiz__fg fg">
-                                            <label>Enter the exact domain name you want to verify </label>
+                                            <label>Enter the exact domain name you want to verify </span> </label>
                                             <input type="text" class="domain_field">
                                         </fieldset>
                                         <fieldset class="quiz__fg fg">
                                             <label>Enter this complete domain verification key in the TXT value field of your DNS zone.</label>
                                             <div class="copy-input">
                                                 <input type="text" class="txt_record_field">
-                                                <button class="copy-input__btn">
+                                                <button class="copy-input__btn" onclick="copyTXTRecord()">
                                                     <img src="img/copy.png" alt="">
                                                 </button>
                                             </div>
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="quiz__bottom">
                                         <button class="quiz__link" data-step="backStep1">←back</button>
-                                        <button class="verify_btn quiz__btn mbtn mbtn-white">Verify ownership →</button>
+                                        <button class="verify_btn quiz__btn mbtn mbtn-white" onclick="addDomain()">Verify ownership →</button>
                                     </div>
                                 </div>
                             </div>
