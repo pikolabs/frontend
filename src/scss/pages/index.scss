@@ -37,12 +37,26 @@
     padding: 6.2em 3.3em 3.2em 16.5em;
     background: linear-gradient(133.72deg, rgba(253, 241, 220, 0.2) 0%, rgba(251, 79, 255, 0.048) 43.31%, rgba(255, 255, 255, 0.2) 83.99%), radial-gradient(112% 143.93% at 100% 0%, #9288FF 0%, #EFDEEE 45.31%, #FFE3DA 59.38%, #FDB3D7 93.54%);
     background-size: cover;
+    position: relative;
+    &::before{
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 20%;
+      background-image: url(../img/fade.png);
+      background-size:cover;
+      left: 0;
+      top: 0;
+    }
   }
   &__title{
     font-weight: 800;
     font-size: 5.5em;
     line-height: 95%;
-
+    &-text{
+      position: relative;
+      z-index: 2;
+    }
     &-word{
       display: inline;
       .swiper-container{
@@ -400,6 +414,9 @@
       width: 100%;
       padding:37px 22px 22px;
       margin-top: 58px;
+      &::before{
+        display: none;
+      }
     }
     &__desc{
       max-width: 100%;

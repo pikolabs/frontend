@@ -55,12 +55,10 @@ function animateWord(title) {
     block.innerHTML = ''
     span.classList.add("words-slider__text")
     span.innerHTML = `${title}`
-    console.log(span)
     block.append(span)
 
     let text = document.querySelector(".words-slider__text")
     text.classList.add("words-slider__text--active")
-    console.log(text)
 }
 
 function artSlider() {
