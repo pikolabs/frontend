@@ -121,6 +121,9 @@
     height: 3em;
     font-size: 1.9em;
     border-radius: .5em;
+    &:hover{
+      box-shadow: none;
+    }
   }
   &__form{
     margin-top: 4em;
@@ -149,7 +152,7 @@
     }
   }
   &__fg_error{
-  
+
     input{
       font-size: 1.5em;
       height: 3.8em;

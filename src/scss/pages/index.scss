@@ -35,7 +35,7 @@
     height: auto;
     border-radius:  0.6em;
     padding: 6.2em 3.3em 3.2em 16.5em;
-    background: url(../img/main-bg.png), radial-gradient(42.97% 33.23% at 69.77% 45.22%, rgba(255, 236, 67, 0.2) 17.19%, rgba(158, 150, 255, 0.108333) 66.15%, rgba(96, 140, 255, 0.172) 100%) , linear-gradient(155.09deg, #557AFF 35.49%, rgba(255, 79, 227, 0.510417) 63.54%, rgba(255, 201, 120, 0.49) 91.02%);
+    background: linear-gradient(133.72deg, rgba(253, 241, 220, 0.2) 0%, rgba(251, 79, 255, 0.048) 43.31%, rgba(255, 255, 255, 0.2) 83.99%), radial-gradient(112% 143.93% at 100% 0%, #9288FF 0%, #EFDEEE 45.31%, #FFE3DA 59.38%, #FDB3D7 93.54%);
     background-size: cover;
   }
   &__title{

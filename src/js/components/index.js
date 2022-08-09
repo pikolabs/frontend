@@ -28,7 +28,7 @@ function headSlider() {
         autoplay: {
             delay: 4000
         },
-        speed: 3000,
+        speed: 1500,
         fadeEffect: {
             crossFade: false
         },
@@ -40,7 +40,7 @@ function headSlider() {
             slideChange: function () {
                 let title = document.querySelector(".main__img .swiper-slide-next").getAttribute("data-head-title")
                 setTimeout(
-                    document.querySelector(".words-slider").innerHTML = title,
+                    animateWord(title),
                     2000
                 )
             },
@@ -48,6 +48,20 @@ function headSlider() {
     })
 }
 
+
+function animateWord(title) {
+    let block = document.querySelector(".words-slider")
+    let span = document.createElement('span');
+    block.innerHTML = ''
+    span.classList.add("words-slider__text")
+    span.innerHTML = `${title}`
+    console.log(span)
+    block.append(span)
+
+    let text = document.querySelector(".words-slider__text")
+    text.classList.add("words-slider__text--active")
+    console.log(text)
+}
 
 function artSlider() {
     var swiper = new Swiper('.main__art-items.swiper-container', {
