@@ -51,11 +51,10 @@
                                 <div class="quiz__step">
                                     <div class="quiz__title display2">Your domains</div>
                                     <div class="quiz__table">
-
                                     </div>
                                     <div class="quiz__bottom">
                                         <button class="quiz__link">Add domain to get more points</button>
-                                        <button class="quiz__btn mbtn mbtn-white arrow-right"  data-step="addDomain">
+                                        <button class="quiz__btn mbtn mbtn-white arrow-right" data-step="addDomain">
                                             <span class="arrow-right__text">Add domain</span>
                                             <span class="arrow-right__icon">→</span>
                                         </button>
@@ -95,18 +94,25 @@
                                 <span class="arrow-right__icon">→</span>
                             </button>
                         </div>
-                        <br>
-                        <div class="container_result"></div>
-                        <div class="find__brands">
-                            <div class="find__brands-img">
-                                <img src="img/brand.png" alt="">
-                            </div>
-                            <div class="find__brands-img">
-                                <img src="img/brand2.png" alt="">
+                        <div id="results_count" class="domains__title"></div>
+                        <div id="results_loader" align="center" class="hidden">
+                            <h1 style="font-size:2em;">Loading...</h1>
+                        </div>
+                        <div id="results_container" class="domains__table">
+                        </div>
+                        <div id="pagination_buttons" class="domains__tabs">
+                            <br>
+                            <div class="container_result"></div>
+                            <div class="find__brands">
+                                <div class="find__brands-img">
+                                    <img src="img/brand.png" alt="">
+                                </div>
+                                <div class="find__brands-img">
+                                    <img src="img/brand2.png" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
         </main>
         <footer class="footer footer--bg">

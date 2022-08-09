@@ -152,8 +152,9 @@ async function search() {
     loader.classList.add("hidden")
 
 }
-
-search()
+if (document.getElementById("search_domains")){
+    search()
+}
 async function tiers() {
     let tiers_buttons = document.getElementById("tiers_buttons")
     if (!tiers_buttons) {

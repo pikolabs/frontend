@@ -12,7 +12,7 @@
 
 <body class="index-page">
     <div class="wrapper">
-<!--        <img src="img/bg.svg" alt="" class="wrapper__bg">-->
+        <!--        <img src="img/bg.svg" alt="" class="wrapper__bg">-->
         <header class="header">
     <div class="container">
         <div class="header__inner">
@@ -35,7 +35,6 @@
 </header>
 
         <main class="content">
-
             <section class="main">
                 <div class="container">
                     <div class="main__inner">
@@ -125,11 +124,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>
-
             <section class="find">
                 <div class="container">
                     <div class="find__inner">
@@ -146,7 +143,14 @@
                             </button>
                         </div>
                         <br>
-                        <div class="container_result"></div>
+                        <div id="results_count" class="domains__title"></div>
+                        <div id="results_loader" align="center" class="hidden">
+                            <h1 style="font-size:2em;">Loading...</h1>
+                        </div>
+                        <div id="results_container" class="domains__table">
+                        </div>
+                        <div id="pagination_buttons" class="domains__tabs">
+                        </div>
                         <div class="find__brands">
                             <div class="find__brands-img">
                                 <img src="img/brand.png" alt="">
@@ -163,7 +167,6 @@
                     </div>
                 </div>
             </section>
-
             <section class="community">
                 <div class="container">
                     <div class="community__slider">
@@ -263,7 +266,6 @@
                     </div>
                 </div>
             </section>
-
             <section class="why-choose">
                 <div class="container">
                     <div class="why-choose__title display2">
@@ -304,7 +306,6 @@
                     </div>
                 </div>
             </section>
-
             <section class="join">
                 <div class="container">
                     <form class="join__inner">
@@ -321,7 +322,6 @@
                     </form>
                 </div>
             </section>
-
         </main>
         <footer class="footer">
             <div class="container">
@@ -358,7 +358,6 @@
 
         </footer>
     </div>
-
     <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
 <script src="js/libs.min.js"></script>
 <script src="js/main.min.js"></script>
