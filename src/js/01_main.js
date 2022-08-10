@@ -105,6 +105,12 @@ async function onEnter() {
     })
 }
 
+
+async function openSearch(){    
+    let query_value = document.querySelector(".query_value")
+    window.open("/search?search="+query_value.value, "_self")
+}
+
 onEnter()
 let prev_query = ''
 async function search() {
@@ -116,6 +122,16 @@ async function search() {
     if (!container) {
         return
     }
+    let search = new URLSearchParams(window.location.search).get("search")
+   
+    if (query_value.value){
+        let refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search="+query_value.value
+        window.history.pushState({ path: refresh }, '', refresh)
+    }
+    if ((!query_value.value)&&search){
+        query_value.value=search
+    }
+
     container.innerHTML = ""
     count.innerHTML = ""
 
@@ -229,8 +245,6 @@ async function pagination(count) {
 
 async function set_page(e, i) {
     page = i
-    console.log(e)
-
     e.target.classList.add('domains__tab--active')
     search(page)
 }
