@@ -33,16 +33,20 @@ function headSlider() {
             crossFade: false
         },
         on: {
-            init: function () {
+            init: function() {
                 let title = document.querySelector(".main__img .swiper-slide-active").getAttribute("data-head-title")
                 document.querySelector(".words-slider").innerHTML = title
             },
-            slideChange: function () {
-                let title = document.querySelector(".main__img .swiper-slide-next").getAttribute("data-head-title")
-                setTimeout(
-                    animateWord(title),
-                    2000
-                )
+            slideChange: function() {
+                try {
+                    let title = document.querySelector(".main__img .swiper-slide-next").getAttribute("data-head-title")
+                    setTimeout(
+                        animateWord(title),
+                        2000
+                    )
+                } catch (err) {
+                    console.log(err)
+                }
             },
         },
     })
