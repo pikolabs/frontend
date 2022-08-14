@@ -4,8 +4,13 @@ let step2 = document.querySelector(".quiz__step2")
 
 
 if (step1Btn) {
-    step1Btn.onclick = function() {
+    step1Btn.onclick = async function() {
+        if (!window.ethereum||!address){
+            alert("Please, connect MetaMask before.")
+            return   
+        }
         step2.classList.add("quiz__step2--active")
+
     }
 }
 

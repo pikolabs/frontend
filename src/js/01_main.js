@@ -11,8 +11,12 @@ if (burger) {
 
 
 
-
-const provider = new ethers.providers.Web3Provider(window.ethereum)
+let provider 
+try{
+    provider = new ethers.providers.Web3Provider(window.ethereum)
+}catch(err){
+    console.log(err)
+}
 const claim_abi = [
 
     {
@@ -46,20 +50,25 @@ const claim_abi = [
 
 let connect_btn = document.querySelector(".connect_btn")
 let account_btn = document.querySelector(".account_btn")
-
+let address
 async function connectMetamask() {
-    if (address) {
-        window.open("/domains", "_self")
+    try {
+        if (address) {
+            window.open("/domains", "_self")
+        }
+        await provider.send("eth_requestAccounts", []);
+        checkAccount()
+    } catch (err) {
+        console.log(err)
     }
-    await provider.send("eth_requestAccounts", []);
-    checkAccount()
 }
 
 
 
 connect_btn.onclick = connectMetamask
-let address
+
 async function checkAccount() {
+    try{
     let signer = provider.getSigner()
     address = await signer.getAddress()
     if (address) {
@@ -71,6 +80,9 @@ async function checkAccount() {
             console.log()
         }
     }
+}catch(err){
+    console.log(err)
+}
 
 }
 
@@ -100,15 +112,19 @@ async function onEnter() {
     input.addEventListener("keypress", function(event) {
         if (event.key == "Enter") {
             event.preventDefault()
+            if (window.location.pathname!="/search"){
+                openSearch()
+                return
+            }
             search()
         }
     })
 }
 
 
-async function openSearch(){    
+async function openSearch() {
     let query_value = document.querySelector(".query_value")
-    window.open("/search?search="+query_value.value, "_self")
+    window.open("/search?search=" + query_value.value, "_self")
 }
 
 onEnter()
@@ -123,13 +139,13 @@ async function search() {
         return
     }
     let search = new URLSearchParams(window.location.search).get("search")
-   
-    if (query_value.value){
-        let refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search="+query_value.value
+
+    if (query_value.value) {
+        let refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search=" + query_value.value
         window.history.pushState({ path: refresh }, '', refresh)
     }
-    if ((!query_value.value)&&search){
-        query_value.value=search
+    if ((!query_value.value) && search) {
+        query_value.value = search
     }
 
     container.innerHTML = ""
@@ -168,7 +184,7 @@ async function search() {
     loader.classList.add("hidden")
 
 }
-if (document.getElementById("search_domains")){
+if (document.getElementById("search_domains")) {
     search()
 }
 async function tiers() {
@@ -292,45 +308,50 @@ function copyTXTRecord() {
 }
 
 
-
 async function addDomain() {
-    let signer = provider.getSigner()
-    let domain = document.querySelector(".domain_field")
-    domain.parentElement.classList.remove("quiz__fg_error")
-    domain.value=domain.value.toLowerCase()
-    if (!(/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.art$/.test(domain.value))){
-        domain.parentElement.classList.add("quiz__fg_error")
-        alert("Please, make sure the domain is .art")
-        return
-    }
-    let data = await fetch("/api/add-domain?" + new URLSearchParams({ account: await signer.getAddress(), domain: domain.value }))
-    if (data.status != 200) {
-        alert("Please, check TXT record and try it later")
-        return
-    }
 
-    await getDomains()
-    document.querySelector(".quiz__step2").classList.remove("quiz__step2--active")
+    try {
 
+        let signer = provider.getSigner()
+
+        let domain = document.querySelector(".domain_field")
+        domain.parentElement.classList.remove("quiz__fg_error")
+        domain.value = domain.value.toLowerCase()
+        if (!(/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.art$/.test(domain.value))) {
+            domain.parentElement.classList.add("quiz__fg_error")
+            alert("Please, make sure the domain is .art")
+            return
+        }
+        let data = await fetch("/api/add-domain?" + new URLSearchParams({ account: await signer.getAddress(), domain: domain.value }))
+        if (data.status != 200) {
+            alert("Please, check TXT record and try it later")
+            return
+        }
+
+        await getDomains()
+        document.querySelector(".quiz__step2").classList.remove("quiz__step2--active")
+    } catch (err) {
+        alert("Please, connect MetaMask before.")
+    }
 
 }
 
-async function suggestion(){
+async function suggestion() {
     let domain = document.querySelector(".find__search-link")
-    if (!domain){
+    if (!domain) {
         return
     }
-    let data = await fetch("/api/search?" + new URLSearchParams({ suggestion:true }))
+    let data = await fetch("/api/search?" + new URLSearchParams({ suggestion: true }))
     let list = await data.json()
-    domain.innerHTML=list.data[0].Domain
-    domain.href=`https://search.art.art/en?domain=` + list.data[0].Domain
+    domain.innerHTML = list.data[0].Domain
+    domain.href = `https://search.art.art/en?domain=` + list.data[0].Domain
 }
 
 suggestion()
 
 
-async function addEmail(event){
-    fetch("/api/add-email?email="+document.getElementById("subscriber_email").value)
+async function addEmail(event) {
+    fetch("/api/add-email?email=" + document.getElementById("subscriber_email").value)
     event.preventDefault()
-    document.getElementById("subscriber_email").value=""
+    document.getElementById("subscriber_email").value = ""
 }
