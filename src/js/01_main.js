@@ -173,7 +173,7 @@ async function search() {
             <div class="domains__info tier` + i.Tier + `">
                 <div class="domains__info-item">` + i.Domain + `</div>
                 <div class="domains__info-item">Tier ` + i.Tier + `</div>
-                <div class="domains__info-item">Score: ` + 10 * 2 ** i.Tier + `</div>
+                <div class="domains__info-item">Tokens: ` + 10 * 2 ** i.Tier + `</div>
             </div>
             <a href="https://search.art.art/en?domain=` + i.Domain + `" class="domains__link mbtn mbtn-black">Check avalibility</a>
         </div>
@@ -285,12 +285,15 @@ async function getDomains() {
                 <div class="domains__info-item">` + i.Domain + `</div>
                 <div class="domains__info-item">Tier ` + i.Tier + `</div>
                 <div class="domains__info-item">Exp ` + (new Date(i.Exp)).toLocaleDateString() + `</div>
-                <div class="domains__info-item">Score: ` + 10 * 2 ** i.Tier + `</div>
+                <div class="domains__info-item">Tokens: ` + 10 * 2 ** i.Tier + `</div>
             </div>
         </div>`
 
     })
-    tokens_count.innerHTML = tokens + " tokens"
+
+    let bonus = await fetch("/api/bonus?"+new URLSearchParams({ account: address }))
+    bonus = await bonus.json()
+    tokens_count.innerHTML = tokens+bonus.total + " tokens"
 }
 
 
@@ -354,4 +357,21 @@ async function addEmail(event) {
     fetch("/api/add-email?email=" + document.getElementById("subscriber_email").value)
     event.preventDefault()
     document.getElementById("subscriber_email").value = ""
+}
+
+
+function twitterBonus() {
+    if (!address){
+        alert("Please, connect MetaMask first!")
+        return
+    }
+
+    OAuth.initialize('YC_NlvtF5hzC5dey4jjatFE0Y-4')
+    OAuth.popup('twitter').done(function(result) { 
+        console.log(result)
+            fetch("/api/twitter-bonus?" + new URLSearchParams({account: address,  ...result.toJson() })).then(async function(result){
+                console.log(await result.json())
+            })
+        // do some stuff with result
+    })
 }

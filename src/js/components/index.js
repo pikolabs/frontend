@@ -53,12 +53,17 @@ function headSlider() {
 }
 
 
+let replacements = {
+    "you": "web3",
+    "music": "builders"
+}
+
 function animateWord(title) {
     let block = document.querySelector(".words-slider")
     let span = document.createElement('span');
     block.innerHTML = ''
     span.classList.add("words-slider__text")
-    span.innerHTML = `${title}`
+    span.innerHTML = `${replacements[title]||title}`
     block.append(span)
 
     let text = document.querySelector(".words-slider__text")
@@ -95,3 +100,4 @@ brandSlider()
 document.addEventListener("DOMContentLoaded", function(event) {
     headSlider()
 });
+
