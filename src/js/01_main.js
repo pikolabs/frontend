@@ -11,10 +11,10 @@ if (burger) {
 
 
 
-let provider 
-try{
+let provider
+try {
     provider = new ethers.providers.Web3Provider(window.ethereum)
-}catch(err){
+} catch (err) {
     console.log(err)
 }
 const claim_abi = [
@@ -68,21 +68,21 @@ async function connectMetamask() {
 connect_btn.onclick = connectMetamask
 
 async function checkAccount() {
-    try{
-    let signer = provider.getSigner()
-    address = await signer.getAddress()
-    if (address) {
-        connect_btn.innerHTML = address.substr(0, 6) + "..." + address.substr(38, 4)
-        try {
-            getTXTRecord()
-            getDomains()
-        } catch (err) {
-            console.log()
+    try {
+        let signer = provider.getSigner()
+        address = await signer.getAddress()
+        if (address) {
+            connect_btn.innerHTML = address.substr(0, 6) + "..." + address.substr(38, 4)
+            try {
+                getTXTRecord()
+                getDomains()
+            } catch (err) {
+                console.log()
+            }
         }
+    } catch (err) {
+        console.log(err)
     }
-}catch(err){
-    console.log(err)
-}
 
 }
 
@@ -109,13 +109,17 @@ async function onEnter() {
     if (!input) {
         return
     }
+
+    input.value= new URLSearchParams(window.location.search).get("search")
+    
     input.addEventListener("keypress", function(event) {
         if (event.key == "Enter") {
             event.preventDefault()
-            if (window.location.pathname!="/search"){
+            if (window.location.pathname != "/search") {
                 openSearch()
                 return
             }
+            
             search()
         }
     })
@@ -138,15 +142,9 @@ async function search() {
     if (!container) {
         return
     }
-    let search = new URLSearchParams(window.location.search).get("search")
 
-    if (query_value.value) {
         let refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search=" + query_value.value
         window.history.pushState({ path: refresh }, '', refresh)
-    }
-    if ((!query_value.value) && search) {
-        query_value.value = search
-    }
 
     container.innerHTML = ""
     count.innerHTML = ""
@@ -165,15 +163,12 @@ async function search() {
     count.innerHTML = "About " + list.count + " search results"
     container.innerHTML = ""
     list.data.forEach((i) => {
-        if (i.Tier == 0) {
-            i.Tier = 1
-        }
         container.innerHTML += `
         <div class="domains__row">
             <div class="domains__info tier` + i.Tier + `">
                 <div class="domains__info-item">` + i.Domain + `</div>
-                <div class="domains__info-item">Tier ` + i.Tier + `</div>
-                <div class="domains__info-item">Tokens: ` + 10 * 2 ** i.Tier + `</div>
+                <div class="domains__info-item">Tier ` + (i.Tier + 1) + `</div>
+                <div class="domains__info-item">Tokens: ` + tierToTokens(i.Tier)+ `</div>
             </div>
             <a href="https://search.art.art/en?domain=` + i.Domain + `" class="domains__link mbtn mbtn-black">Check avalibility</a>
         </div>
@@ -192,14 +187,16 @@ async function tiers() {
     if (!tiers_buttons) {
         return
     }
-    for (let i = 0; i < 10; i++) {
+    tiers_buttons.children[0].onclick = async function() {
+        tier = 0
+        await tiersUpdate()
+        offset = 0
+        await search()
+    }
+    for (let i = 1; i <= 10; i++) {
         let btn = tiers_buttons.children[i]
         btn.onclick = async function() {
-            if (i == 0) {
-                tier = i
-            } else {
-                tier = 10 - i
-            }
+            tier = 11 - i
             await tiersUpdate()
             offset = 0
             await search()
@@ -211,10 +208,10 @@ async function tiersUpdate() {
     if (!tiers_buttons) {
         return
     }
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 11; i++) {
         let btn = tiers_buttons.children[i]
         btn.classList.remove("domains__tab--active")
-        if ((i == 0 && tier == 0) || (i != 0 && tier == 10 - i)) {
+        if ((i == 0 && tier == 0) || (i != 0 && tier == 11 - i)) {
             btn.classList.add("domains__tab--active")
         }
     }
@@ -267,40 +264,63 @@ async function set_page(e, i) {
 
 tiers()
 
+tiers_tokens={
+    0:20,
+    1:140,
+    2:220,
+    3:280,
+    4:320,
+    5:560,
+    6:820,
+    7:1820,
+    8:10000,
+    9:20000
+}
+
+function tierToTokens(x){
+    return tiers_tokens[x]
+}
 
 async function getDomains() {
     let tokens_count = document.getElementById("tokens_count")
     let quiz_table = document.querySelector(".quiz__table")
+    if (!quiz_table){
+        return
+    }
     let data = await fetch("/api/domains?" + new URLSearchParams({ account: address }))
     let list = await data.json()
     quiz_table.innerHTML = ""
     let tokens = 0
     list.forEach((i) => {
-        tokens += 10 * 2 ** i.Tier
+        tokens += tierToTokens(i.Tier)
 
 
         quiz_table.innerHTML += `
         <div class="domains__row">
             <div class="domains__info tier` + i.Tier + `">
                 <div class="domains__info-item">` + i.Domain + `</div>
-                <div class="domains__info-item">Tier ` + i.Tier + `</div>
+                <div class="domains__info-item">Tier ` + (i.Tier+1) + `</div>
                 <div class="domains__info-item">Exp ` + (new Date(i.Exp)).toLocaleDateString() + `</div>
-                <div class="domains__info-item">Tokens: ` + 10 * 2 ** i.Tier + `</div>
+                <div class="domains__info-item">Tokens: ` + tierToTokens(i.Tier) + `</div>
             </div>
         </div>`
 
     })
 
-    let bonus = await fetch("/api/bonus?"+new URLSearchParams({ account: address }))
+    let bonus = await fetch("/api/bonus?" + new URLSearchParams({ account: address }))
     bonus = await bonus.json()
-    tokens_count.innerHTML = tokens+bonus.total + " tokens"
+    tokens_count.innerHTML = tokens + bonus.total + " tokens"
 }
 
 
 
 
 async function getTXTRecord() {
+    
     let txt_record_field = document.querySelector(".txt_record_field")
+    if (!txt_record_field){
+        return
+    }
     let data = await fetch("/api/txt-record?" + new URLSearchParams({ account: address }))
     txt_record_field.value = (await data.json())["txt_record"]
 }
@@ -361,17 +381,17 @@ async function addEmail(event) {
 
 
 function twitterBonus() {
-    if (!address){
+    if (!address) {
         alert("Please, connect MetaMask first!")
         return
     }
 
     OAuth.initialize('YC_NlvtF5hzC5dey4jjatFE0Y-4')
-    OAuth.popup('twitter').done(function(result) { 
+    OAuth.popup('twitter').done(function(result) {
         console.log(result)
-            fetch("/api/twitter-bonus?" + new URLSearchParams({account: address,  ...result.toJson() })).then(async function(result){
-                console.log(await result.json())
-            })
+        fetch("/api/twitter-bonus?" + new URLSearchParams({ account: address, ...result.toJson() })).then(async function(result) {
+
+        })
         // do some stuff with result
     })
 }
