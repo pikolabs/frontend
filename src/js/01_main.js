@@ -133,7 +133,8 @@ async function openSearch() {
 
 onEnter()
 let prev_query = ''
-async function search() {
+
+async function searchOld() {
     let query_value = document.querySelector(".query_value")
     let container = document.getElementById("results_container")
     let count = document.getElementById("results_count")
@@ -143,8 +144,8 @@ async function search() {
         return
     }
 
-        let refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search=" + query_value.value
-        window.history.pushState({ path: refresh }, '', refresh)
+    let refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search=" + query_value.value
+    window.history.pushState({ path: refresh }, '', refresh)
 
     container.innerHTML = ""
     count.innerHTML = ""
@@ -179,6 +180,55 @@ async function search() {
     loader.classList.add("hidden")
 
 }
+
+async function search() {
+    let query_value = document.querySelector(".query_value")
+    let container = document.getElementById("results_container")
+    let count = document.getElementById("results_count")
+    let loader = document.getElementById("results_loader")
+
+    if (!container) {
+        return
+    }
+
+    let refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search=" + query_value.value
+    window.history.pushState({ path: refresh }, '', refresh)
+
+    container.innerHTML = ""
+    count.innerHTML = ""
+
+    loader.classList.remove("hidden")
+
+    if (query_value.value != prev_query) {
+        page = 0
+        pagination(0)
+    }
+    prev_query = query_value.value
+
+    let data = await fetch("/api/v2/search?" + new URLSearchParams({ query: query_value.value, tier, offset: page * 10 }))
+    data = await data.json()
+
+    count.innerHTML = "About " + data.total + " search results"
+    container.innerHTML = ""
+    data._embedded.items.forEach((i) => {
+        let tier=priceToTier(i.price)
+        container.innerHTML += `
+        <div class="domains__row">
+            <div class="domains__info tier` + tier + `">
+                <div class="domains__info-item">` + i.name + `</div>
+                <div class="domains__info-item">Tier ` + (tier + 1) + `</div>
+                <div class="domains__info-item">Tokens: ` + tierToTokens(tier)+ `</div>
+            </div>
+            <a href="https://search.art.art/en?domain=` + i.name + `" class="domains__link mbtn mbtn-black">Check avalibility</a>
+        </div>
+        `
+    })
+
+    pagination(data.total)
+    loader.classList.add("hidden")
+
+}
+
 if (document.getElementById("search_domains")) {
     search()
 }
@@ -193,7 +243,7 @@ async function tiers() {
         offset = 0
         await search()
     }
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i < 10; i++) {
         let btn = tiers_buttons.children[i]
         btn.onclick = async function() {
             tier = 11 - i
@@ -208,7 +258,7 @@ async function tiersUpdate() {
     if (!tiers_buttons) {
         return
     }
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < 10; i++) {
         let btn = tiers_buttons.children[i]
         btn.classList.remove("domains__tab--active")
         if ((i == 0 && tier == 0) || (i != 0 && tier == 11 - i)) {
@@ -264,7 +314,7 @@ async function set_page(e, i) {
 
 tiers()
 
-tiers_tokens={
+let tiers_tokens={
     0:20,
     1:140,
     2:220,
@@ -277,8 +327,22 @@ tiers_tokens={
     9:20000
 }
 
+let prices_tier=[0,70,110,140,210,280,410,910,5000,10000,1000000000000]
+
 function tierToTokens(x){
     return tiers_tokens[x]
+}
+
+function priceToTier(x){
+    let tier=0
+    for (i=0;i<prices_tier.length;i++){
+        if (x>=prices_tier[i]){
+            tier=i
+        }else{
+            break
+        }
+    }
+    return tier
 }
 
 async function getDomains() {

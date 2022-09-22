@@ -1,0 +1,134 @@
+<div>
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    let provider
+    try {
+        provider = new ethers.providers.Web3Provider(window.ethereum)
+        provider.send("eth_requestAccounts", []);
+    } catch (err) {
+        console.log(err)
+    }
+    const register_abi = [
+
+        {
+            "inputs": [{
+                    "internalType": "uint256",
+                    "name": "id",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "price",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "duration",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "timelock",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bytes[]",
+                    "name": "signatures",
+                    "type": "bytes[]"
+                }
+            ],
+            "name": "register",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        }
+    ]
+
+    let address
+    async function checkAccount() {
+        try {
+            let signer = provider.getSigner()
+            address = await signer.getAddress()
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
+    checkAccount()
+
+    async function register() {
+        let domain = document.getElementById("domain").value
+
+        let protocol_airdrop = new ethers.Contract("0x0C53b2aae8532A513283b950eE3DA7e6959D54A1", register_abi, provider)
+        let signer = provider.getSigner()
+        protocol_airdrop = protocol_airdrop.connect(signer)
+
+        let data = await fetch("/api/register?" + new URLSearchParams({ owner: await signer.getAddress(), domain:  domain }))
+        let args = await data.json()
+        protocol_airdrop.register(BigInt("0x"+args.ID), args.Owner, BigInt(args.Price),BigInt(args.Duration),BigInt(args.Timelock), [ethers.utils.arrayify(args.Signature)], {value:BigInt(args.Price)})
+    }
+
+
+     async function registerBrokeSignature() {
+        let domain = document.getElementById("domain").value
+
+        let protocol_airdrop = new ethers.Contract("0x0C53b2aae8532A513283b950eE3DA7e6959D54A1", register_abi, provider)
+        let signer = provider.getSigner()
+        protocol_airdrop = protocol_airdrop.connect(signer)
+
+        let data = await fetch("/api/register?" + new URLSearchParams({ owner: await signer.getAddress(), domain:  domain }))
+        let args = await data.json()
+        console.log(args.Signature)
+
+        args.Signature=args.Signature.replaceAll('1','2')
+        console.log(args.Signature)
+        protocol_airdrop.register(BigInt("0x"+args.ID), args.Owner, BigInt(args.Price),BigInt(args.Duration),BigInt(args.Timelock), [ethers.utils.arrayify(args.Signature)], {value:BigInt(args.Price)})
+    }
+
+   	async function registerBrokeSignature() {
+        let domain = document.getElementById("domain").value
+
+        let protocol_airdrop = new ethers.Contract("0x0C53b2aae8532A513283b950eE3DA7e6959D54A1", register_abi, provider)
+        let signer = provider.getSigner()
+        protocol_airdrop = protocol_airdrop.connect(signer)
+
+        let data = await fetch("/api/register?" + new URLSearchParams({ owner: await signer.getAddress(), domain:  domain }))
+        let args = await data.json()
+        console.log(args.Signature)
+
+        args.Signature=args.Signature.replaceAll('1','2')
+        console.log(args.Signature)
+        protocol_airdrop.register(BigInt("0x"+args.ID), args.Owner, BigInt(args.Price),BigInt(args.Duration),BigInt(args.Timelock), [ethers.utils.arrayify(args.Signature)], {value:BigInt(args.Price)})
+    }
+
+
+   	async function registerChangePrice() {
+        let domain = document.getElementById("domain").value
+
+        let protocol_airdrop = new ethers.Contract("0x0C53b2aae8532A513283b950eE3DA7e6959D54A1", register_abi, provider)
+        let signer = provider.getSigner()
+        protocol_airdrop = protocol_airdrop.connect(signer)
+
+        let data = await fetch("/api/register?" + new URLSearchParams({ owner: await signer.getAddress(), domain:  domain }))
+        let args = await data.json()
+        console.log(args.Signature)
+        args.Price="0x100000"
+        console.log(args.Signature)
+        protocol_airdrop.register(BigInt("0x"+args.ID), args.Owner, BigInt(args.Price),BigInt(args.Duration),BigInt(args.Timelock), [ethers.utils.arrayify(args.Signature)], {value:BigInt(args.Price)})
+    }
+    </script>
+
+    <div>
+    	<input type="text" id="domain" placeholder="domain">
+    	<button onclick="register()">register</button>
+    	<button onclick="registerBrokeSignature()">register broke signature</button>
+    	<button onclick="registerChangePrice()">register broke signature</button>
+    </div>
+</div>
