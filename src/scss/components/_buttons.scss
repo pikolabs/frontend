@@ -10,6 +10,14 @@
     }
 }
 
+.mbtn-green{
+    background: linear-gradient(269.7deg, #20BF55 1.35%, #01BAEF 99.74%);
+    color: #fff;
+    &:hover{
+        color: #fff;
+    }
+}
+
 .mbtn-black-outline{
     border: 3px solid $black;
     border-radius:  0.6em;

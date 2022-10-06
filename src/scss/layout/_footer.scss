@@ -51,7 +51,6 @@
     //padding-top: 5.5em;
     //margin-top: auto;
     color: #5B5B5B;
-
   }
 }
 
@@ -59,6 +58,10 @@
   .footer{
     margin: 0;
     padding: 45px 0;
+    background: #eaeaea;
+    &:before{
+      display: none;
+    }
     &__logo{
       position: absolute;
       bottom: 4px;
