@@ -52,6 +52,31 @@ function headSlider() {
     })
 }
 
+let advSliders = document.querySelectorAll(".adv .swiper-container")
+
+if(advSliders.length>0){
+    advSliders.forEach(el => {
+        const swiper = new Swiper('.adv .swiper-container', {
+            slidesPerView: "auto",
+            spaceBetween: 25,
+            loop: true,
+            speed: 4000,
+            loopPreventsSlide: true,
+            autoplay: {
+                delay: 0,
+            },
+            breakpoints: {
+                320: {
+                    spaceBetween: 10
+                },
+                576: {
+                    spaceBetween: 25
+                },
+            }
+        })
+    })
+}
+
 
 let replacements = {
     "you": "web3",
@@ -92,10 +117,27 @@ function brandSlider() {
     })
 }
 
-communitySlider()
+function supportSlider(){
+    new Swiper(".support .swiper-container",{
+        slidesPerView:5,
+        spaceBetween:30,
+        breakpoints:{
+            320:{
+                slidesPerView:"auto",
+                spaceBetween:30
+            },
+            576:{
+                slidesPerView:5,
+                spaceBetween:30
+            }
+        }
+    })
+}
 
+communitySlider()
 artSlider()
 brandSlider()
+supportSlider()
 
 document.addEventListener("DOMContentLoaded", function(event) {
     headSlider()
