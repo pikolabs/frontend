@@ -434,7 +434,7 @@ async function suggestion() {
     domain.href = `https://search.art.art/en?domain=` + list.data[0].Domain
 }
 
-suggestion()
+//suggestion()
 
 
 async function addEmail(event) {
