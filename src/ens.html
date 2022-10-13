@@ -1,0 +1,110 @@
+<!DOCTYPE html> @@include('components/page-blocks/_head.html',{ "lang":"en", "title":"Protocol.art - Claim your .ART domain airdrop", "description":"", "keywords":"",})
+
+<body>
+    <div class="wrapper">
+        <!--        <img src="img/bg.svg" alt="" class="wrapper__bg">-->
+        @@include('components/page-blocks/_header.html')
+        <main class="content">
+            <section class="result">
+                <div class="container">
+                    <div class="find__search">
+                        <input type="text" class="query_value" placeholder="Type domain name here for example ">
+                        <button value="crazy.art" class="find__search-btn mbtn mbtn-white-outline arrow-right">
+                            <span class="arrow-right__text">Search domain</span>
+                            <span class="arrow-right__icon">→</span>
+                        </button>
+                    </div>
+                    <div class="result__inner">
+                        <div class="result__top">
+                            <div class="result__statuses">
+                                <div class="result__status">5 characters</div>
+                                <div class="result__status">Airdrop: 100 Tokens</div>
+                            </div>
+                            <div class="result__text">
+                                <div class="result__title display2">
+                                    cr@zy.art
+                                    <span>is available on ENS</span>
+                                </div>
+                            </div>
+
+                            <div class="output">
+                                <div class="output__grid1">
+                                    <div class="output__col">
+                                        <div class="output__item">
+                                            <div>
+                                                <span class="year-output">1</span>
+                                                <span>year</span>
+                                            </div>
+                                            <div class="output__year">
+                                                <button class="output__year-btn year-minus">
+                                                    <span>-</span>
+                                                </button>
+                                                <button class="output__year-btn year-plus">
+                                                    <span>+</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="output__hint body-text">Registration Period</div>
+                                    </div>
+                                    <div class="output__col">
+                                        <div class="output__item">
+                                            <span>0.008 ETH</span>
+                                        </div>
+                                        <div class="output__hint body-text">Registration price to pay</div>
+                                    </div>
+                                    <div class="output__col">
+                                        <div class="output__item">
+                                            <span>10.03 USD</span>
+                                        </div>
+                                        <div class="output__hint body-text">Estimate by Chainlink</div>
+                                    </div>
+                                </div>
+
+                                <div class="faq__hint body-text">
+                                    <i class="faq__hint-icon">
+                                        <img src="img/info.png" alt="">
+                                    </i>
+                                    <span>No wallet connected. Please connect a wallet to continue.</span>
+                                </div>
+
+                                <div class="output__grid2">
+                                    <div class="output__col">
+                                        <div class="output__item">
+                                            <span>0.008 ETH + at most 0.011 ETH gas fee = at most 0.018 ETH</span>
+                                        </div>
+                                        <div class="output__hint body-text">Estimated Total (Price + Gas). The gas price is based at 48 Gwei</div>
+                                    </div>
+                                    <div class="output__col">
+                                        <div class="output__item">
+                                            <span>24.18 USD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq faq--ens">
+                            <div class="faq__bottom">
+                                <div class="faq__info">
+                                    <div class="faq__info-title body-text">Your wallet will open and you will be asked to confirm a transactions required for registration. </div>
+                                    <div class="faq__hint body-text">
+                                        <i class="faq__hint-icon">
+                                            <img src="img/info.png" alt="">
+                                        </i>
+                                        <span>No wallet connected. Please connect a wallet to continue.</span>
+                                    </div>
+                                </div>
+                                <button class="faq__btn mbtn mbtn-green">Register now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            @@include('components/page-blocks/_footer.html')
+        </footer>
+    </div>
+    @@include('components/page-blocks/_scripts.html')
+</body>
+
+</html>

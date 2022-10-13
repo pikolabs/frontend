@@ -86,3 +86,12 @@
 .hidden{
     display:none;
 }
+
+.mbtn-white-outline{
+    border: 2px solid #FFFFFF;
+    color: #fff;
+    &:hover{
+        background-color: #fff;
+        color: $black;
+    }
+}
