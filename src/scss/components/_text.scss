@@ -1,4 +1,10 @@
 @import "../vars";
+.display1{
+  font-size: 5.5em;
+  line-height: 108%;
+  font-weight: 800;
+}
+
 .display2{
   font-size: 3.7em;
   line-height: 105%;
@@ -14,13 +20,26 @@
   font-weight: 900;
 }
 
+.body-text{
+  font-weight: 500;
+  font-family: $font3;
+  font-size: 1.5em;
+  line-height: 150%;
+}
 
 @media screen and (max-width: 576px){
+  .display1{
+    font-size: 40px;
+  }
   .display2{
     font-size: 34px;
   }
   .display3{
     font-size: 18px;
     line-height: 110%;
+  }
+
+  .body-text{
+    font-size: 16px;
   }
 }

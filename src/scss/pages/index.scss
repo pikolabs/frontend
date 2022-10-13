@@ -317,7 +317,7 @@
     position: relative;
   }
   &__icon{
-    max-width: 6em;
+    max-width: 13em;
     margin-bottom: 4.2em;
     display: block;
   }
@@ -410,6 +410,19 @@
         color: $black;
       }
     }
+  }
+}
+
+.mint{
+  padding: 6.5em 0 1em;
+  &__title{
+    text-align: center;
+  }
+  &__items{
+    margin-top: 3.65em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
   }
 }
 
@@ -647,6 +660,19 @@
       width: 100%;
       max-width: 100%;
       margin-bottom: 2em;
+    }
+  }
+
+  .mint{
+    padding: 30px 0;
+    &__title{
+      br{
+        display: none;
+      }
+    }
+    &__items{
+      grid-template-columns: 100%;
+      gap: 20px;
     }
   }
 }
