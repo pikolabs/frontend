@@ -1,18 +1,21 @@
 <!DOCTYPE html> @@include('components/page-blocks/_head.html',{ "lang":"en", "title":"Protocol.art - Claim your .ART domain airdrop", "description":"", "keywords":"",})
 
-<body>
+<body class="index-page">
     <div class="wrapper">
         <!--        <img src="img/bg.svg" alt="" class="wrapper__bg">-->
         @@include('components/page-blocks/_header.html')
         <main class="content">
             <section class="result">
                 <div class="container">
-                    <div class="find__search">
-                        <input type="text" class="query_value" placeholder="Type domain name here for example ">
-                        <button value="crazy.art" class="find__search-btn mbtn mbtn-white-outline arrow-right">
-                            <span class="arrow-right__text">Search domain</span>
-                            <span class="arrow-right__icon">→</span>
-                        </button>
+                    <div class="search-wrap">
+                        <div class="find__search">
+                            <input type="text" class="query_value" placeholder="Type domain name here for example ">
+                            <button onclick="search()" class="find__search-btn mbtn mbtn-white-outline arrow-right">
+                                <span class="arrow-right__text">Search</span>
+                                <span class="arrow-right__icon">→</span>
+                            </button>
+                        </div>
+                        @@include('components/page-blocks/_search.html')
                     </div>
                     <div class="result__inner">
                         <div class="result__top">
@@ -50,6 +53,10 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <section class="join">
+                @@include('components/page-blocks/_join.html')
             </section>
         </main>
         <footer class="footer">

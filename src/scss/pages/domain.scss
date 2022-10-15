@@ -30,34 +30,40 @@
     }
   }
   &__title{
-    font-size: 1.8em;
-    margin: 2em 0;
+    //font-size: 1.8em;
+    margin: 1.2em 0;
+    font-weight: 500;
+    font-family: $font3;
+  }
+  &__rows{
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 2.7em;
   }
   &__row{
     display: flex;
     align-items: center;
-    &:not(:last-child){
-      margin-bottom: 1.6em;
-    }
+    background: #FFD4CF;
+    border-radius: 1em;
+    padding: 1em;
+    font-family: $font3;
   }
   &__link{
-    font-size: 1.5em;
-    height: 46px;
+    font-size: 1.9em;
+    height: 3em;
     border-radius: .6em;
-    padding: 0 .5em;
+    padding: 0 1.5em;
     margin-left: .7em;
     flex-shrink: 0;
   }
   &__info{
-    padding: 10px 0;
     border-radius: .6em;
-    height: 46px;
     flex-grow: 1;
-    font-size: 1.5em;
+    font-size: 1.9em;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr 1.5fr;
     &-item{
-      padding: 0 1.6em;
+      padding: .6em 1.6em;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -115,6 +121,9 @@
       transform: translate(-50%, -50%);
     }
   }
+  .result__inner{
+    margin: 0;
+  }
 }
 
 @media screen and (max-width: 576px){
@@ -130,27 +139,35 @@
     &__table{
       margin-top: 20px;
     }
+    &__rows{
+      gap: 20px;
+    }
     &__row{
       display: block;
-      &:not(:last-child){
-        margin-bottom: 20px;
-      }
+      padding: 32px 29px 29px;
     }
     &__link{
       width: 100%;
-      height: 46px;
-      font-size: 14px;
-      margin: 5px 0 0;
+      height: 62px;
+      font-size: 20px;
+      margin: 20px 0 0;
     }
     &__info{
-      padding: 10px;
-      grid-template-columns: 100%;
-      gap: 10px;
+      padding: 0;
+      grid-template-columns: .4fr 1fr;
+      gap: 20px;
       height: unset;
       &-item{
+        display: block;
         padding: 0;
-        font-size: 16px;
+        font-size: 18px;
+        line-height: 150%;
         border: none !important;
+      }
+      &-title{
+        grid-column: 1/3;
+        font-weight: 700;
+        font-size: 30px;
       }
     }
     &__tabs{
