@@ -1,6 +1,6 @@
 <!DOCTYPE html> @@include('components/page-blocks/_head.html',{ "lang":"en", "title":"Protocol.art - Dashboard", "description":"", "keywords":"",})
 
-<body>
+<body class="index-page">
     <div class="wrapper">
         @@include('components/page-blocks/_header.html')
         <main class="content">
@@ -10,31 +10,27 @@
                         <div class="statistic__left">
                             <div class="statistic__subtitle">You are eligible for</div>
                             <div id="tokens_count" class="statistic__title">0 tokens</div>
-                            <div class="statistic__desc">Add a domain and verify ownership to participate in the airdrop. Domains come in 9 different types, each type gives a different amount of airdrop. The number of domains per user is unlimited.
-                                <br>
-                                <br>
-                                <p>To get more bonus tokens:</p>
+                            <div class="statistic__desc">Point represent comrohensive difference between different domains, expertaion, tiers and activieties. The more points you have to more airdrop you can potentialy get
+
                                 <a href="https://twitter.com/dotartprotocol?ref_src=twsrc%5Etfw" class="twitter-follow-button" style="display:inline-block;"data-size="large" data-show-count="false"></a>
-                                <br>
-                                <button style="padding:0.6em; border-radius: 0.5em; font-size: 1.25em; display: block; line-height: 1em; width: 100%; " class="tier9 mbtn" onclick="twitterBonus()">Claim</button>
-                                
+<!--                                <button style="padding:0.6em; border-radius: 0.5em; font-size: 1.25em; display: block; line-height: 1em; width: 100%; " class="tier9 mbtn" onclick="twitterBonus()">Claim</button>-->
                                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                             </div>
-                            <button class="statistic__btn mbtn mbtn-black arrow-right hidden">
-                                <span class="arrow-right__text">Invite a friend</span>
-                                <span class="arrow-right__icon">→</span>
-                            </button>
+                            <a href="" class="statistic__link">About tiers and airdrop →</a>
                         </div>
                         <div class="statistic__right">
                             <div class="quiz">
                                 <div class="quiz__step">
                                     <div class="quiz__title display2">Your domains</div>
+                                    <div class="quiz__desc">Add your .art domains to get more airdrop tokens</div>
                                     <div class="quiz__table">
                                     </div>
                                     <div class="quiz__bottom">
-                                        <button class="quiz__link">Add domain to get more points</button>
-                                        <button class="quiz__btn mbtn mbtn-white arrow-right" data-step="addDomain">
-                                            <span class="arrow-right__text">Add domain</span>
+                                        <button class="quiz__btn mbtn mbtn-white-outline" data-step="addDomain">
+                                            Buy .art domain
+                                        </button>
+                                        <button class="quiz__btn mbtn mbtn-linear arrow-right" data-step="addDomain">
+                                            <span class="arrow-right__text">I own .art domain </span>
                                             <span class="arrow-right__icon">→</span>
                                         </button>
                                     </div>
@@ -64,36 +60,76 @@
                             </div>
                         </div>
                     </div>
-                    <div class="find__inner">
-                        <div class="find__search">
-                            <input type="text" class="query_value" placeholder="Type domain name here for example ">
-                            <button onclick="openSearch()" class="find__search-btn mbtn mbtn-black arrow-right">
-                                <span class="arrow-right__text">Search domain</span>
+
+                    <div class="social__wrap twitter">
+                        <div class="social social__top twitter__top">
+                            <div class="social__name">
+                                <span class="social__icon">
+                                    <img src="img/twitter.png" alt="">
+                                </span>
+                                <span class="social__title display2">Twitter .art ENS raffle</span>
+                            </div>
+                            <a href="" class="social__link mbtn mbtn-green arrow-right">
+                                <span class="arrow-right__text">Follow on Twitter </span>
                                 <span class="arrow-right__icon">→</span>
-                            </button>
+                            </a>
                         </div>
-                        <div id="results_count" class="domains__title"></div>
-                        <div id="results_loader" align="center" class="hidden">
-                            <h1 style="font-size:2em;">Loading...</h1>
-                        </div>
-                        <div id="results_container" class="domains__table">
-                        </div>
-                        <div id="pagination_buttons" class="domains__tabs"></div>
-                        <br>
-                        <div class="container_result"></div>
-                        <div class="find__brands">
-                            <div class="find__brands-img">
-                                <img src="img/brand.png" alt="">
+                        <div class="faq">
+                            <div class="faq__title display2">FAQ</div>
+                            <div class="faq__grid">
+                                <div class="faq__col">
+                                    <div class="faq__subtitle">Check again later</div>
+                                    <div class="faq__desc body-text">Owners of DNS domain can use TXT record to verify ownership and obtain untransferable domain that can be used in ENS ecosystem</div>
+                                </div>
+                                <div class="faq__col">
+                                    <div class="faq__subtitle">Mint ENS after purchase</div>
+                                    <div class="faq__desc body-text">Use benefit of ENS for your ART project. More than 50 partners and counting. ART ENS is fully transferable and can be traded p2p </div>
+                                </div>
+                                <div class="faq__col">
+                                    <div class="faq__subtitle">Mint ENS after purchase</div>
+                                    <div class="faq__desc body-text">Join Discord and open customer support tecket if you have any qusetions about ENS mint</div>
+                                </div>
                             </div>
-                            <div class="find__brands-img">
-                                <img src="img/brand2.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="social__wrap">
+                        <div class="social social__top">
+                            <div class="social__name">
+                                <span class="social__icon">
+                                    <img src="img/twitter.png" alt="">
+                                </span>
+                                <span class="social__title display2">Join Discord</span>
                             </div>
+                            <a href="" class="social__link mbtn mbtn-green arrow-right">
+                                <span class="arrow-right__text">Join Discord</span>
+                                <span class="arrow-right__icon">→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="social__wrap">
+                        <div class="social social__top">
+                            <div class="social__name">
+                                <span class="social__icon">
+                                    <img src="img/twitter.png" alt="">
+                                </span>
+                                <span class="social__title display2">Become .ART ambassador</span>
+                            </div>
+                            <a href="" class="social__link mbtn mbtn-green arrow-right">
+                                <span class="arrow-right__text">Apply </span>
+                                <span class="arrow-right__icon">→</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <section class="join">
+                @@include('components/page-blocks/_join.html')
+            </section>
         </main>
-        <footer class="footer footer--bg">
+        <footer class="footer">
             @@include('components/page-blocks/_footer.html')
         </footer>
     </div>
